@@ -2,7 +2,46 @@
 
 本项目基于飞桨官方图像分割套件 [PaddleSeg](https://github.com/PaddlePaddle/PaddleSeg)，实现了遥感图像分割任务，并引入 **MOE（Mixture of Experts）结构** 以增强模型的泛化能力与任务适应性。
 
+
 ---
+
+## 🛠 部署环境
+
+本项目基于以下环境开发与运行：
+
+- Python：`3.9.20`
+- PaddlePaddle-GPU：`2.5.1`
+- 推荐使用 Anaconda 或 Miniconda 管理环境
+
+---
+
+### ✅ 快速创建环境（推荐使用 conda）
+
+```bash
+# 创建名为 ps 的 conda 环境
+conda create -n ps python=3.9
+
+# 激活环境
+conda activate ps
+
+# 安装 PaddlePaddle（GPU 版）
+pip install paddlepaddle-gpu==2.5.1 -f https://www.paddlepaddle.org.cn/whl/mkl/avx/stable.html
+```
+
+> 📌 请根据你的 CUDA 版本选择合适的 PaddlePaddle 安装源。详见：[Paddle 官网安装指南](https://www.paddlepaddle.org.cn/install/quick)
+
+---
+
+### 🧩 安装项目依赖
+
+
+```bash
+pip install -r requirements.txt
+```
+
+
+---
+
 
 ## 🔧 项目结构说明
 
