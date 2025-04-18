@@ -5,6 +5,10 @@
 
 ---
 
+以下是你这部分内容的 **润色优化版**，我对格式、逻辑顺序和表达方式做了完善，使其更清晰专业，并适配 `README.md` 的排版规范：
+
+---
+
 ## 🛠 部署环境
 
 本项目基于以下环境开发与运行：
@@ -15,28 +19,47 @@
 
 ---
 
-git clone https://github.com/Republic1024/PaddleSeg3
-cd PaddleSeg3
+## 🚀 快速开始
 
-### ✅ 快速创建环境（推荐使用 conda）
+### 1️⃣ 克隆项目
 
 ```bash
-# 创建名为 ps 的 conda 环境
+git clone https://github.com/Republic1024/PaddleSeg3.git
+cd PaddleSeg3
+```
+
+### 2️⃣ 下载模型参数（checkpoint）
+
+请从以下链接下载训练好的模型参数（`output/` 文件夹）并替换项目中的空文件夹：
+
+```
+https://pam.baidu.xxx/your_model_checkpoint_link
+```
+
+下载后，将 `output/` 文件夹覆盖到本地 `PaddleSeg3/` 项目目录下。
+
+---
+
+### ✅ 创建 Python 环境（推荐使用 Conda）
+
+```bash
+# 创建名为 ps 的 Conda 环境
 conda create -n ps python=3.9
 
 # 激活环境
 conda activate ps
 
-# 安装 PaddlePaddle（GPU 版）
+# 安装 PaddlePaddle（根据你的 CUDA 版本）
 pip install paddlepaddle-gpu==2.5.1 -f https://www.paddlepaddle.org.cn/whl/mkl/avx/stable.html
 ```
 
-> 📌 请根据你的 CUDA 版本选择合适的 PaddlePaddle 安装源。详见：[Paddle 官网安装指南](https://www.paddlepaddle.org.cn/install/quick)
+📌 请根据你的 CUDA 驱动版本选择正确的安装源，详见：[PaddlePaddle 安装指南](https://www.paddlepaddle.org.cn/install/quick)
 
 ---
 
 ### 🧩 安装项目依赖
 
+确保项目根目录存在 `requirements.txt`，执行以下命令安装依赖：
 
 ```bash
 pip install -r requirements.txt
@@ -44,10 +67,16 @@ pip install -r requirements.txt
 
 ---
 
-## 运行最小demo
+## 🧪 运行最小 DEMO
 
-cd paddle
-运行 road_seg.ipynb
+进入核心代码目录并运行示例：
+
+```bash
+cd paddleseg
+```
+
+打开并运行 `road_seg.ipynb` Notebook 文件，进行道路分割演示。
+
 
 ---
 
@@ -113,6 +142,7 @@ mask[forest_mask == 0] = 5    # 类别5：森林
 以下为基于 `RtFormer` 网络结构的遥感图像预测示例：
 
 ```bash
+cd paddleseg
 python tools/predict.py \
   --config configs/rtformer/rtformer_base_cityscapes_1024x512_120k.yml \
   --model_path ../output/rtformer_udd/best_model_2/model.pdparams \
