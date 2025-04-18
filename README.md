@@ -33,10 +33,8 @@ cd PaddleSeg3
 请从以下链接下载训练好的模型参数（`output/` 文件夹）并替换项目中的空文件夹：
 
 ```
-
 https://pan.baidu.com/s/14FohHLISAdQJCgr2NoKaoQ?pwd=rryh 
 提取码: rryh 
-
 ```
 
 下载后，将 `output/` 文件夹覆盖到本地 `PaddleSeg3/` 项目目录下。
@@ -53,11 +51,11 @@ conda create -n ps python=3.9
 conda activate ps
 
 # 安装 PaddlePaddle（根据你的 CUDA 版本）
-pip install paddlepaddle-gpu==2.5.1 -f https://www.paddlepaddle.org.cn/whl/mkl/avx/stable.html
+# CUDA 12.0
+python -m pip install paddlepaddle-gpu==2.5.2.post120 -f https://www.paddlepaddle.org.cn/whl/windows/mkl/avx/stable.html
 ```
 
-📌 请根据你的 CUDA 驱动版本选择正确的安装源，详见：[PaddlePaddle 安装指南](https://www.paddlepaddle.org.cn/install/quick)
-
+📌 请根据你的 CUDA 驱动版本选择正确的安装源，详见：https://www.paddlepaddle.org.cn/install/old
 ---
 
 ### 🧩 安装项目依赖
@@ -77,9 +75,7 @@ pip install -r requirements.txt
 ```bash
 cd paddleseg
 ```
-
 打开并运行 `road_seg.ipynb` Notebook 文件，进行道路分割演示。
-
 
 ---
 
@@ -121,7 +117,7 @@ mask = all_seg(
 forest_mask = all_seg(
     image_path=img_path,  # --image_path 参数
     config_path="./configs/segformer/segformer_udd_b3.yml",  # --config 参数
-    model_path=r"D:\pythonProject\DeepSeek\ps3\PaddleSeg\output\iter_40000\model.pdparams",  # --model_path 参数
+    model_path=r"..\output\iter_40000\model.pdparams",  # --model_path 参数
     save_dir="../output/test",  # --save_dir 参数
 )
 ```
@@ -133,7 +129,6 @@ forest_mask = all_seg(
 MOE结构的关键在于融合不同专家的结果，示例如下：
 
 ```python
-mask_2 = mask.copy()
 mask[road_mask == 1] = 2      # 类别2：道路
 mask[forest_mask == 0] = 5    # 类别5：森林
 ```
@@ -153,6 +148,10 @@ python tools/predict.py \
   --save_dir ../output/rtformer_udd
 ```
 
+以下基于PPLITESEG rural为例，对模型进行训练：
+```bash
+python tools/train.py --config configs/pp_liteseg/pp_liteseg_rural_2.yml --save_dir output/rural_seg_pplite_2 --save_interval 500 --do_eval 
+```
 ---
 
 ## 📌 注意事项
