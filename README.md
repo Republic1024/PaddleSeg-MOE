@@ -15,6 +15,9 @@
 
 ---
 
+git clone https://github.com/Republic1024/PaddleSeg3
+cd PaddleSeg3
+
 ### ✅ 快速创建环境（推荐使用 conda）
 
 ```bash
@@ -39,6 +42,12 @@ pip install paddlepaddle-gpu==2.5.1 -f https://www.paddlepaddle.org.cn/whl/mkl/a
 pip install -r requirements.txt
 ```
 
+---
+
+## 运行最小demo
+
+cd paddle
+运行 road_seg.ipynb
 
 ---
 
