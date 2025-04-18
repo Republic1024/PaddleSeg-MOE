@@ -1,8 +1,8 @@
 # 忽略常见大文件或模型文件
 *.zip
-#*.jpg
-#*.jpeg
-#*.png
+*.jpg
+*.jpeg
+*.png
 *.bmp
 *.tif
 *.tiff
@@ -13,3 +13,5 @@
 *.pdstates
 *.log
 *.ckpt
+*.zip
+*.rar
