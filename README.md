@@ -174,3 +174,14 @@ cd paddleseg
 - 当前版本为“轻量代码结构”，**不含训练模型与大文件**
 - 若需完整数据集与权重，请通过提取链接或自行训练
 
+## 👤 项目作者
+
+本项目由 [Republic1024](https://github.com/Republic1024) 维护与开发，欢迎关注与交流。
+
+📫 联系方式：
+- GitHub: [Republic1024](https://github.com/Republic1024)
+
+## 📖 开源协议
+
+本项目采用 [MIT License](./LICENSE) 协议开源，您可以自由使用、修改、分发该项目代码，但请保留原始版权声明。
+
