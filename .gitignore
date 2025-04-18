@@ -2,7 +2,7 @@
 *.zip
 *.jpg
 *.jpeg
-*.png
+#*.png
 *.bmp
 *.tif
 *.tiff
