@@ -1,0 +1,50 @@
+batch_size: 2
+iters: 160000
+
+train_dataset:
+  type: Dataset
+  dataset_root: ../rural
+  train_path: ../rural/train.txt
+  num_classes: 7
+  transforms:
+    - type: ResizeStepScaling
+      min_scale_factor: 0.5
+      max_scale_factor: 2.0
+      scale_step_size: 0.25
+    - type: RandomPaddingCrop
+      crop_size: [1024, 1024]
+    - type: RandomHorizontalFlip
+    - type: RandomDistort
+      brightness_range: 0.4
+      contrast_range: 0.4
+      saturation_range: 0.4
+    - type: Normalize
+  mode: train
+
+val_dataset:
+  type: Dataset
+  dataset_root: ../rural
+  val_path: ../rural/val.txt
+  num_classes: 7
+  transforms:
+    - type: Normalize
+  mode: val
+
+model:
+  type: SegFormer_B3
+  num_classes: 7
+  pretrained: https://bj.bcebos.com/paddleseg/dygraph/mix_vision_transformer_b3.tar.gz
+
+optimizer:
+    type: sgd
+
+lr_scheduler:
+  type: PolynomialDecay
+  learning_rate: 0.001
+  power: 0.9
+
+
+loss:
+  types:
+    - type: CrossEntropyLoss
+  coef: [1]

@@ -1,0 +1,73 @@
+_base_: '../_base_/cityscapes.yml'
+
+batch_size: 4  # 可根据显存再上调（你24GB可尝试 12）
+
+iters: 160000
+
+optimizer:
+  type: Momentum
+  momentum: 0.9
+  weight_decay: 4.0e-4
+
+lr_scheduler:
+  type: PolynomialDecay
+  warmup_iters: 2000
+  warmup_start_lr: 1.0e-6
+  learning_rate: 0.0025
+  end_lr: 1.0e-6
+  power: 0.9
+
+loss:
+  types:
+    - type: OhemCrossEntropyLoss
+      min_kept: 60000     # 稍微降低以增强hard example效果
+    - type: OhemCrossEntropyLoss
+      min_kept: 60000
+    - type: OhemCrossEntropyLoss
+      min_kept: 60000
+  coef: [1, 1, 1]
+
+
+
+train_dataset:
+  type: Dataset
+  dataset_root: ../rural
+  train_path: ../rural/train.txt
+  num_classes: 7
+  transforms:
+    - type: ResizeStepScaling
+      min_scale_factor: 0.25
+      max_scale_factor: 1.75
+      scale_step_size: 0.125
+    - type: RandomPaddingCrop
+      crop_size: [512,512]
+    - type: RandomHorizontalFlip
+    - type: RandomBlur
+    - type: RandomDistort
+      brightness_range: 0.6
+      contrast_range: 0.6
+      saturation_range: 0.6
+    - type: Normalize
+  mode: train
+
+val_dataset:
+  type: Dataset
+  dataset_root: ../rural
+  val_path: ../rural/val.txt
+  num_classes: 7
+  transforms:
+    - type: Normalize
+  mode: val
+
+model:
+  type: PPLiteSeg
+  num_classes: 7
+  backbone:
+    type: STDC2
+    pretrained: https://bj.bcebos.com/paddleseg/dygraph/PP_STDCNet2.tar.gz
+  arm_out_chs: [ 64, 128, 256 ]
+  seg_head_inter_chs: [ 64, 64, 64 ]
+
+test_config:
+  aug_eval: True
+  scales: [ 0.5, 1.0, 1.5 ]

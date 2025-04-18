@@ -1,0 +1,50 @@
+batch_size: 1  # 推理阶段通常为1
+iters: 80000
+
+model:
+  type: PPLiteSeg
+  num_classes: 2
+  backbone:
+    type: STDC1
+    pretrained: https://bj.bcebos.com/paddleseg/dygraph/PP_STDCNet1.tar.gz
+  arm_out_chs: [32, 64, 128]
+  seg_head_inter_chs: [32, 64, 64]
+
+transforms:
+  - type: Normalize
+# 以下为占位用，不参与推理流程
+train_dataset:
+  type: Dataset
+  dataset_root: ./fake_root
+  train_path: ./fake_train.txt
+  num_classes: 2
+  transforms:
+    - type: Normalize
+  mode: train
+
+optimizer:
+  type: sgd
+  learning_rate: 0.01
+
+lr_scheduler:
+  type: PolynomialDecay
+  learning_rate: 0.01
+  end_lr: 0
+  power: 0.9
+  warmup_iters: 1000
+  warmup_start_lr: 1.0e-5
+
+loss:
+  types:
+    - type: DiceLoss
+    - type: DiceLoss
+  coef: [1, 0.4]
+
+val_dataset:
+  type: Dataset
+  dataset_root: ./fake_root
+  train_path: ./fake_train.txt
+  num_classes: 2
+  transforms:
+    - type: Normalize
+  mode: train

@@ -1,0 +1,15 @@
+# 忽略常见大文件或模型文件
+*.zip
+*.jpg
+*.jpeg
+*.png
+*.bmp
+*.tif
+*.tiff
+*.gif
+*.webp
+*.pdparams
+*.pdopt
+*.pdstates
+*.log
+*.ckpt

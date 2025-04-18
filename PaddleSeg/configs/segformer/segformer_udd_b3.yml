@@ -1,0 +1,53 @@
+batch_size: 2
+iters: 120000
+
+train_dataset:
+  type: Dataset
+  dataset_root: ../UDD6/
+  train_path: ../UDD6/train.txt
+  num_classes: 6
+  transforms:
+    - type: ResizeStepScaling
+      min_scale_factor: 0.5
+      max_scale_factor: 2.0
+      scale_step_size: 0.25
+    - type: RandomPaddingCrop
+      crop_size: [ 1024, 1024 ]
+    - type: RandomHorizontalFlip
+    - type: RandomDistort
+      brightness_range: 0.4
+      contrast_range: 0.4
+      saturation_range: 0.4
+    - type: Normalize
+  mode: train
+
+val_dataset:
+  type: Dataset
+  dataset_root: ../UDD6/
+  val_path: ../UDD6/val.txt
+  num_classes: 6
+  transforms:
+    - type: Normalize
+  mode: val
+
+model:
+  type: SegFormer
+  backbone:
+    type: MixVisionTransformer_B3
+    pretrained: https://bj.bcebos.com/paddleseg/dygraph/backbone/mix_vision_transformer_b3.tar.gz
+  embedding_dim: 768 #768
+  num_classes: 6
+
+optimizer:
+  type: sgd
+
+lr_scheduler:
+  type: PolynomialDecay
+  learning_rate: 0.001
+  power: 0.9
+
+
+loss:
+  types:
+    - type: CrossEntropyLoss
+  coef: [ 1 ]

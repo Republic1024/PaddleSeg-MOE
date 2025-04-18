@@ -1,0 +1,53 @@
+_base_: './segmenter_vit_base_linear_ade20k_512x512_160k.yml'
+
+batch_size: 4
+iters: 80000
+
+model:
+  type: MaskSegmenter
+  h_embed_dim: 768
+  h_depth: 2 #2
+  h_num_heads: 12 #12
+  h_mlp_ratio: 4
+  h_drop_rate: 0.0
+  h_drop_path_rate: 0.1
+
+  # 加入以下行以兼容 rural 的分类数
+  num_classes: 7  # 根据你的分类数调整
+
+train_dataset:
+  type: Dataset
+  dataset_root: ../rural
+  train_path: ../rural/train.txt
+  num_classes: 7
+  transforms:
+    - type: ResizeByShort
+      short_size: 512
+    - type: RandomHorizontalFlip
+    - type: RandomDistort
+    - type: Normalize
+    - type: Padding
+      target_size: [ 512, 512 ]
+  mode: train
+
+val_dataset:
+  type: Dataset
+  dataset_root: ../rural
+  val_path: ../rural/val.txt
+  num_classes: 7
+  transforms:
+    - type: ResizeByShort
+      short_size: 512
+    - type: Normalize
+
+optimizer:
+  weight_decay: 0.0
+
+lr_scheduler:
+  learning_rate: 0.001
+  end_lr: 1.0e-05
+
+test_config:
+  is_slide: True
+  crop_size: [512, 512]
+  stride: [512, 512]
