@@ -33,7 +33,10 @@ cd PaddleSeg3
 请从以下链接下载训练好的模型参数（`output/` 文件夹）并替换项目中的空文件夹：
 
 ```
-https://pam.baidu.xxx/your_model_checkpoint_link
+
+https://pan.baidu.com/s/14FohHLISAdQJCgr2NoKaoQ?pwd=rryh 
+提取码: rryh 
+
 ```
 
 下载后，将 `output/` 文件夹覆盖到本地 `PaddleSeg3/` 项目目录下。
