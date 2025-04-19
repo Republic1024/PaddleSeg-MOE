@@ -38,7 +38,7 @@
 
 - Python：`3.9.20`
 - PaddlePaddle-GPU：`2.5.2`
-- 环境管理：推荐使用 [Anaconda](https://www.anaconda.com/) 或 [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
+- 环境管理：推荐使用 [Anaconda](https://www.anaconda.com/) 或 [Miniconda](https://docs.conda.io/en/latest/miniconda.html)或Mamba
 
 ---
 
