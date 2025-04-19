@@ -1,6 +1,6 @@
 # 忽略常见大文件或模型文件
 *.zip
-*.jpg
+# *.jpg
 *.jpeg
 #*.png
 *.bmp

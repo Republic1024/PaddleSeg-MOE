@@ -9,7 +9,7 @@
 ## 🖼️ 分割效果展示
 
 ### 原始输入图像
-![4.jpg](photo%2F4.jpg)
+![4](./assets/4.jpg)
 
 ### 分割结果示例
 ![img_3.png](img_3.png)
@@ -95,7 +95,7 @@ pip install -r requirements.txt
 
 ## 📂 项目结构说明
 
-项目结构模块化清晰，主要包括：
+项目结构模块主要包括：
 
 - `configs/`：模型结构与训练参数配置
 - `paddleseg/`：模型实现、数据处理、损失函数等核心模块
