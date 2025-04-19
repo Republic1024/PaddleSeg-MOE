@@ -47,8 +47,8 @@
 ### 1️⃣ 克隆项目
 
 ```bash
-git clone https://github.com/Republic1024/PaddleSeg3.git
-cd PaddleSeg3
+git clone https://github.com/Republic1024/PaddleSeg-MOE.git
+cd PaddleSeg3-MOE
 ```
 
 ### 2️⃣ 下载模型参数（checkpoint）
@@ -105,13 +105,14 @@ pip install -r requirements.txt
 
 ---
 
-## 🧠 MOE 模型任务流程说明
+## 🧠 MOE 模型任务流程说明(./Paddleseg/road_seg.ipynb)
 
 ### ✅ 全图多类地物分割
 
 调用自定义接口 `all_seg()` 进行整图分割，输出 0~6 类别的语义 mask：
 
 ```python
+from infer_all import road_seg, all_seg, overlay_mask_on_image
 mask = all_seg(
     image_path=img_path,
     config_path="configs/segmenter/segmenter_rural2.yml",
@@ -127,6 +128,7 @@ mask = all_seg(
 引入独立森林专家模型用于提升细分类别精度：
 
 ```python
+from infer_all import road_seg, all_seg, overlay_mask_on_image
 forest_mask = all_seg(
     image_path=img_path,
     config_path="./configs/segformer/segformer_udd_b3.yml",
