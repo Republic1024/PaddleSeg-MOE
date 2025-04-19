@@ -159,7 +159,7 @@ cd paddleseg
 python tools/predict.py \
   --config configs/rtformer/rtformer_base_cityscapes_1024x512_120k.yml \
   --model_path ../output/rtformer_udd/best_model_2/model.pdparams \
-  --image_path "../photo/DJI_00527.JPG" \
+  --image_path "../photo/4.jpg" \
   --save_dir ../output/rtformer_udd
 ```
 
